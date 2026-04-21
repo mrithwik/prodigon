@@ -11,7 +11,6 @@ import {
   type JobResponse,
   type JobSubmission,
   ConnectionError,
-  TimeoutError,
 } from './types';
 
 // ---- Inference (non-streaming) ----

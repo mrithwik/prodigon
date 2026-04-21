@@ -2,12 +2,13 @@
 // MarkdownRenderer — renders assistant markdown with syntax-highlighted code
 // ---------------------------------------------------------------------------
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { oneLight } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { Copy, Check } from 'lucide-react';
+import { useToast } from '@/hooks/use-toast';
 
 interface MarkdownRendererProps {
   content: string;
@@ -22,10 +23,12 @@ function CodeBlock({
 }) {
   const [copied, setCopied] = useState(false);
   const isDark = document.documentElement.classList.contains('dark');
+  const toast = useToast();
 
   const handleCopy = async () => {
     await navigator.clipboard.writeText(children);
     setCopied(true);
+    toast.success('Copied to clipboard');
     setTimeout(() => setCopied(false), 2000);
   };
 

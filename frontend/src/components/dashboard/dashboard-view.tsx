@@ -2,7 +2,6 @@
 // DashboardView — grid layout with health cards and metrics
 // ---------------------------------------------------------------------------
 
-import React from 'react';
 import { MessageSquare, Hash, Wifi, WifiOff } from 'lucide-react';
 import { useHealthPoll } from '@/hooks/use-health-poll';
 import { useChatStore } from '@/stores/chat-store';

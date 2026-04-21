@@ -46,9 +46,29 @@ const config: Config = {
           '0%, 80%, 100%': { transform: 'scale(0)' },
           '40%': { transform: 'scale(1)' },
         },
+        'slide-up': {
+          from: { opacity: '0', transform: 'translateY(0.75rem)' },
+          to: { opacity: '1', transform: 'translateY(0)' },
+        },
+        'shimmer': {
+          from: { transform: 'translateX(-100%)' },
+          to: { transform: 'translateX(100%)' },
+        },
+        'scale-in': {
+          from: { opacity: '0', transform: 'scale(0.95)' },
+          to: { opacity: '1', transform: 'scale(1)' },
+        },
+        'fade-in': {
+          from: { opacity: '0' },
+          to: { opacity: '1' },
+        },
       },
       animation: {
         'bounce-dot': 'bounce-dot 1.4s infinite ease-in-out both',
+        'slide-up': 'slide-up 0.2s ease-out',
+        'shimmer': 'shimmer 1.4s ease-in-out infinite',
+        'scale-in': 'scale-in 0.15s ease-out',
+        'fade-in': 'fade-in 0.2s ease-out',
       },
     },
   },

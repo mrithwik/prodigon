@@ -2,7 +2,6 @@
 // JobList — scrollable list of submitted batch jobs
 // ---------------------------------------------------------------------------
 
-import React from 'react';
 import { Layers } from 'lucide-react';
 import { useJobsStore } from '@/stores/jobs-store';
 import { JobCard } from './job-card';

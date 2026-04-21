@@ -21,7 +21,7 @@ from api_gateway.app.config import GatewaySettings
 from api_gateway.app.dependencies import get_model_client, get_settings, get_worker_client, init_dependencies
 from api_gateway.app.middleware.logging_mw import RequestLoggingMiddleware
 from api_gateway.app.middleware.timing import TimingMiddleware
-from api_gateway.app.routes import generate, health, jobs
+from api_gateway.app.routes import generate, health, jobs, workshop
 from shared.errors import AppError
 from shared.logging import get_logger, setup_logging
 
@@ -69,6 +69,7 @@ app.add_middleware(
 app.include_router(health.router, tags=["health"])
 app.include_router(generate.router)
 app.include_router(jobs.router)
+app.include_router(workshop.router)
 
 
 @app.exception_handler(AppError)

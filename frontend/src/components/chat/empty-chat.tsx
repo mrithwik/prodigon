@@ -2,7 +2,6 @@
 // EmptyChat — welcome screen with suggested prompts
 // ---------------------------------------------------------------------------
 
-import React from 'react';
 import { Sparkles, ArrowRight } from 'lucide-react';
 import { SUGGESTED_PROMPTS } from '@/lib/constants';
 

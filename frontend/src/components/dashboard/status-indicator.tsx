@@ -2,7 +2,6 @@
 // StatusIndicator — animated dot showing service health status
 // ---------------------------------------------------------------------------
 
-import React from 'react';
 import { cn } from '@/lib/utils';
 
 type Status = 'healthy' | 'down' | 'degraded' | 'unknown';

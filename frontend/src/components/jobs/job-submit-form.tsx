@@ -2,7 +2,7 @@
 // JobSubmitForm — textarea for entering prompts, one per line, and submitting
 // ---------------------------------------------------------------------------
 
-import React, { useState, useMemo } from 'react';
+import { useState, useMemo } from 'react';
 import { Loader2, Send } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { api } from '@/api/endpoints';

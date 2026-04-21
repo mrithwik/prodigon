@@ -2,7 +2,6 @@
 // TypingIndicator — three animated bouncing dots
 // ---------------------------------------------------------------------------
 
-import React from 'react';
 
 export function TypingIndicator() {
   return (

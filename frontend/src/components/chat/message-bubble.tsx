@@ -2,7 +2,6 @@
 // MessageBubble — renders a single user or assistant message
 // ---------------------------------------------------------------------------
 
-import React from 'react';
 import { RefreshCw } from 'lucide-react';
 import { cn, formatTime, formatLatency } from '@/lib/utils';
 import type { ChatMessage } from '@/stores/chat-store';

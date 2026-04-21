@@ -2,7 +2,7 @@
 // JobCard — displays a single batch job with status, progress, and results
 // ---------------------------------------------------------------------------
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { ChevronDown, ChevronRight } from 'lucide-react';
 import { cn, truncate } from '@/lib/utils';
 import type { JobResponse, JobStatus } from '@/api/types';

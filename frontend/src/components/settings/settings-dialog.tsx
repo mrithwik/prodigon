@@ -2,7 +2,7 @@
 // SettingsDialog — modal overlay for all user-configurable preferences
 // ---------------------------------------------------------------------------
 
-import { useEffect, useCallback } from 'react';
+import { useEffect, useCallback, useRef } from 'react';
 import { X, Sun, Moon, Monitor } from 'lucide-react';
 import { useSettingsStore, type Theme } from '@/stores/settings-store';
 import { cn } from '@/lib/utils';
@@ -27,23 +27,56 @@ export default function SettingsDialog({ open, onClose }: SettingsDialogProps) {
   const maxTokens = useSettingsStore((s) => s.maxTokens);
   const setMaxTokens = useSettingsStore((s) => s.setMaxTokens);
   const resetToDefaults = useSettingsStore((s) => s.resetToDefaults);
+  const dialogRef = useRef<HTMLDivElement>(null);
+  const triggerRef = useRef<Element | null>(null);
 
-  // Close on Escape
+  // Close on Escape + focus trap
   const handleKeyDown = useCallback(
     (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose();
+      if (e.key === 'Escape') {
+        onClose();
+        return;
+      }
+      if (e.key === 'Tab' && dialogRef.current) {
+        const focusable = Array.from(
+          dialogRef.current.querySelectorAll<HTMLElement>(
+            'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
+          ),
+        ).filter((el) => !(el as HTMLInputElement | HTMLButtonElement | HTMLSelectElement | HTMLTextAreaElement).disabled);
+        if (focusable.length === 0) { e.preventDefault(); return; }
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
     },
     [onClose],
   );
 
   useEffect(() => {
     if (!open) return;
+    // Save trigger element to restore focus on close
+    triggerRef.current = document.activeElement;
     document.addEventListener('keydown', handleKeyDown);
     // Prevent background scroll while modal is open
     document.body.style.overflow = 'hidden';
+    // Auto-focus first focusable element
+    setTimeout(() => {
+      const first = dialogRef.current?.querySelector<HTMLElement>(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
+      );
+      first?.focus();
+    }, 50);
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
       document.body.style.overflow = '';
+      // Restore focus to trigger element
+      (triggerRef.current as HTMLElement | null)?.focus();
     };
   }, [open, handleKeyDown]);
 
@@ -60,6 +93,7 @@ export default function SettingsDialog({ open, onClose }: SettingsDialogProps) {
 
       {/* Dialog card */}
       <div
+        ref={dialogRef}
         role="dialog"
         aria-modal="true"
         aria-label="Settings"

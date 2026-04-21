@@ -2,7 +2,7 @@
 // ChatPage — ensures an active session exists, then renders the chat view
 // ---------------------------------------------------------------------------
 
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useChatStore } from '@/stores/chat-store';
 import { ChatView } from '@/components/chat/chat-view';
 

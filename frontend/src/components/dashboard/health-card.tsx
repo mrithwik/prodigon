@@ -2,7 +2,6 @@
 // HealthCard — displays the health status of a single service
 // ---------------------------------------------------------------------------
 
-import React from 'react';
 import type { ServiceHealth } from '@/hooks/use-health-poll';
 import { StatusIndicator } from './status-indicator';
 import { formatLatency } from '@/lib/utils';

@@ -2,7 +2,6 @@
 // JobsView — split layout with submit form and job list
 // ---------------------------------------------------------------------------
 
-import React from 'react';
 import { JobSubmitForm } from './job-submit-form';
 import { JobList } from './job-list';
 

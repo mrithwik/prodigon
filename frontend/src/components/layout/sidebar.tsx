@@ -2,16 +2,15 @@
 // Sidebar — left navigation panel with session list and nav links
 // ---------------------------------------------------------------------------
 
-import React from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import {
-  Sparkles,
   Plus,
   Trash2,
   MessageSquare,
   LayoutDashboard,
   Layers,
   PanelLeftClose,
+  BookOpen,
 } from 'lucide-react';
 import { cn, truncate } from '@/lib/utils';
 import { useChatStore } from '@/stores/chat-store';
@@ -21,6 +20,7 @@ const NAV_LINKS = [
   { path: '/', label: 'Chat', icon: MessageSquare },
   { path: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
   { path: '/jobs', label: 'Batch Jobs', icon: Layers },
+  { path: '/topics', label: 'Workshop', icon: BookOpen },
 ] as const;
 
 function formatRelativeTime(ts: number): string {
@@ -60,8 +60,10 @@ export function Sidebar() {
     >
       {/* Brand */}
       <div className="flex items-center gap-2 px-4 py-4 shrink-0">
-        <Sparkles className="h-6 w-6 text-primary" />
-        <span className="text-lg font-bold tracking-tight">Prodigon</span>
+        <div className="h-6 w-6 rounded-md bg-primary flex items-center justify-center shrink-0">
+          <span className="text-primary-foreground text-xs font-bold">P</span>
+        </div>
+        <span className="text-lg font-bold tracking-tight gradient-text">Prodigon</span>
       </div>
 
       {/* New Chat */}
@@ -118,11 +120,15 @@ export function Sidebar() {
       <nav className="border-t border-border px-2 py-2 shrink-0 space-y-0.5">
         {NAV_LINKS.map((link) => {
           const Icon = link.icon;
-          const isActive = location.pathname === link.path;
+          const isActive =
+            link.path === '/'
+              ? location.pathname === '/'
+              : location.pathname.startsWith(link.path);
           return (
             <button
               key={link.path}
               onClick={() => navigate(link.path)}
+              aria-current={isActive ? 'page' : undefined}
               className={cn(
                 'flex items-center gap-3 w-full px-3 py-2 rounded-lg text-sm font-medium transition-colors',
                 isActive

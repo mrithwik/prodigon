@@ -2,7 +2,6 @@
 // JobResults — expandable section showing prompt/response pairs
 // ---------------------------------------------------------------------------
 
-import React from 'react';
 import type { JobResponse } from '@/api/types';
 
 interface JobResultsProps {
